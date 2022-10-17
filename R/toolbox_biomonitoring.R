@@ -62,7 +62,6 @@ calculate_embedded_omega <- function(alpha, alpha_embedded, species) {
   # index_max
   calculate_omega(alpha_embedded[, index_max])
   # toc()
-
 }
 
 extract_motifs <- function(bipartite, Inte, six_node = F, subsampling) {
@@ -78,16 +77,16 @@ extract_motifs <- function(bipartite, Inte, six_node = F, subsampling) {
     )
   }
 
-  if(nrow(bipartite) < 6 | ncol(bipartite) < 6){
+  if (nrow(bipartite) < 6 | ncol(bipartite) < 6) {
     res <- res %>%
       filter(num_row + num_col < 5)
   }
-    res %>%
-      mutate(motif = map2(num_row, num_col, ~ get_all_motifs(.x, .y, bipartite, Inte))) %>%
-      unnest(motif) %>%
-      mutate(internal_omega = map_dbl(alpha, ~ calculate_omega(.)))
+  res %>%
+    mutate(motif = map2(num_row, num_col, ~ get_all_motifs(.x, .y, bipartite, Inte))) %>%
+    unnest(motif) %>%
+    mutate(internal_omega = map_dbl(alpha, ~ calculate_omega(.)))
 
-    # mutate(embedded_omega = pmap_dbl(list(alpha, alpha_embedded, species), calculate_embedded_omega))
+  # mutate(embedded_omega = pmap_dbl(list(alpha, alpha_embedded, species), calculate_embedded_omega))
 }
 
 
@@ -99,14 +98,14 @@ get_all_motifs <- function(num_row, num_col, bipartite, Inte, subsampling = T) {
     as_tibble()
 
   # if (subsampling) {
-    if (nrow(numb) > 100) {
-      numb <- numb %>% sample_n(100)
-    }
-   #else {
-    #   (
-    #     numb <- numb %>% sample_frac(.5)
-    #   )
-    # }
+  if (nrow(numb) > 100) {
+    numb <- numb %>% sample_n(100)
+  }
+  # else {
+  #   (
+  #     numb <- numb %>% sample_frac(.5)
+  #   )
+  # }
   # }
 
   numb %>%
@@ -139,20 +138,23 @@ get_motif_gradient <- function(Inte, r_set, bipartite, subsampling = T, cleaning
     })) %>%
     unnest(feasibility_motif)
 
-  if(cleaning == T){
-    tryCatch({
-      res <- res %>%
-        mutate(internal_omega = internal_omega^(num_row + num_col)) %>%
-        # mutate(internal_omega = internal_omega) %>%
-        mutate(ratio = ifelse(feasibility_motif == "feasible",
-                              .5/(internal_omega),
-                              .5/(1-internal_omega)
-        )) %>%
-        select(feasibility_whole, ratio, feasibility_motif) %>%
-        group_split(feasibility_whole)
-    }, error = function(e) {
-      res <- NA
-    })
+  if (cleaning == T) {
+    tryCatch(
+      {
+        res <- res %>%
+          mutate(internal_omega = internal_omega^(num_row + num_col)) %>%
+          # mutate(internal_omega = internal_omega) %>%
+          mutate(ratio = ifelse(feasibility_motif == "feasible",
+            .5 / (internal_omega),
+            .5 / (1 - internal_omega)
+          )) %>%
+          select(feasibility_whole, ratio, feasibility_motif) %>%
+          group_split(feasibility_whole)
+      },
+      error = function(e) {
+        res <- NA
+      }
+    )
   }
   res
 }
@@ -161,15 +163,15 @@ quadraticRoots <- function(a, b, c) {
 
   # print(paste0("You have chosen the quadratic equation ", a, "x^2 + ", b, "x + ", c, "."))
 
-  discriminant <- (b^2) - (4*a*c)
+  discriminant <- (b^2) - (4 * a * c)
 
-    x_int_plus <- (-b + sqrt(discriminant)) / (2*a)
-    # x_int_neg <- (-b - sqrt(discriminant)) / (2*a)
+  x_int_plus <- (-b + sqrt(discriminant)) / (2 * a)
+  # x_int_neg <- (-b - sqrt(discriminant)) / (2*a)
 
   x_int_plus
 }
 
-std <- function(x) sd(x)/sqrt(length(x))
+std <- function(x) sd(x) / sqrt(length(x))
 
 
 # df_minimum

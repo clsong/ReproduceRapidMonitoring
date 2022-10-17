@@ -84,7 +84,7 @@ generate_figure3B_data <- function() {
 #' Reproduce Figure 3B in the main text
 #'
 #' @export
-generate_figure3B_plot <- function(){
+generate_figure3B_plot <- function() {
   df_plot <- fig3B_df_summarized %>%
     unnest(motif_information) %>%
     group_by(nrow, ncol, n_rep_network, lambda, interaction_type) %>%
@@ -100,8 +100,8 @@ generate_figure3B_plot <- function(){
     mutate(data = map2(data, critical, function(data, critical) {
       data %>%
         mutate(lambda = ifelse(lambda < critical,
-                               .5 / critical * lambda,
-                               .5 / (1 - critical) * lambda + 1 - .5 / (1 - critical)
+          .5 / critical * lambda,
+          .5 / (1 - critical) * lambda + 1 - .5 / (1 - critical)
         ))
     })) %>%
     select(-critical) %>%

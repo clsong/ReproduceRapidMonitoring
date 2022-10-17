@@ -79,10 +79,13 @@ generate_figure3C_data <- function() {
         }))
     })) %>%
     mutate(motif_information = future_pmap(list(Inte, r_set, bipartite),
-                                           ~ get_motif_gradient(..1, ..2, ..3),
-                                           .progress = T)) %>%
-    select(-bipartite, -stability, -Inte_component,
-           -mutualistic_strength, -Inte, -r_set)
+      ~ get_motif_gradient(..1, ..2, ..3),
+      .progress = T
+    )) %>%
+    select(
+      -bipartite, -stability, -Inte_component,
+      -mutualistic_strength, -Inte, -r_set
+    )
 
   fic3C_df
 }
@@ -90,7 +93,7 @@ generate_figure3C_data <- function() {
 #' Reproduce Figure 3C in the main text
 #'
 #' @export
-generate_figure3C_plot <- function(){
+generate_figure3C_plot <- function() {
   bootstrap_times <- 50
 
   df_convergence <- fic3C_df %>%
@@ -123,8 +126,8 @@ generate_figure3C_plot <- function(){
     mutate(feasibility_whole = as_factor(feasibility_whole)) %>%
     mutate(
       feasibility_whole = fct_recode(feasibility_whole,
-                                     "Persistent whole network" = "feasible",
-                                     "Non-persistent whole network" = "infeasible"
+        "Persistent whole network" = "feasible",
+        "Non-persistent whole network" = "infeasible"
       )
     )
 

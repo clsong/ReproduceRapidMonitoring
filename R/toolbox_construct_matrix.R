@@ -64,4 +64,3 @@ construct_random_interaction_component <- function(web, strength = 1, interactio
 
   list(alphaA, gammaA, gammaP, alphaP)
 }
-
