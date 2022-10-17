@@ -22,5 +22,6 @@ Imports:
     magrittr (>= 2.0.3),
     mvtnorm,
     purrr,
+    tibble,
     tidyr,
     utils

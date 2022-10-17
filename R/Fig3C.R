@@ -1,20 +1,3 @@
-library(tidyverse)
-library(bmotif)
-library(here)
-library(furrr)
-library(tidymodels)
-library(ggrepel)
-library(purrrgress)
-source("r/toolbox_biomonitoring.r")
-
-theme_set(jtools::theme_nice())
-
-plan(multisession)
-
-# minimum sampled points --------------------------------------------------
-
-library(furrr)
-
 #' Reproduce the data used in Figure 3C in the main text
 #'
 #' @export
@@ -130,6 +113,18 @@ generate_figure3C_plot <- function() {
         "Non-persistent whole network" = "infeasible"
       )
     )
+
+  df_stats <- df_convergence %>%
+    filter(interaction_type == 'antagonistic') %>%
+    select(n_rep_network, feasibility_whole, sampled_number, confidence, richness, interaction_type) %>%
+    mutate(confidence = ifelse(feasibility_whole == 'Persistent whole network', confidence, -confidence)) %>%
+    group_by(feasibility_whole, sampled_number, richness, interaction_type) %>%
+    count(decisive = confidence > 2) %>%
+    group_by(feasibility_whole, sampled_number, richness, interaction_type) %>%
+    mutate(n = n/sum(n)) %>%
+    nest() %>%
+    mutate(data = map(data, ~left_join(tibble(decisive = c(T, F)), .,  by = "decisive"))) %>%
+    unnest(data)
 
   df_stats %>%
     ungroup() %>%

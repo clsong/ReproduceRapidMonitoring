@@ -7,5 +7,6 @@
 #' @import purrr
 #' @import utils
 #' @import ggdist
+#' @import tibble
 #' @importFrom jtools theme_nice
 NULL
