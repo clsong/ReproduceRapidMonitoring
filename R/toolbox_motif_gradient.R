@@ -3,6 +3,7 @@
 #' @param col_label
 #' @param bipartite
 #' @return motif type
+#' @export
 identify_motif <- function(row_label, col_label, bipartite) {
   M <- bipartite[row_label, col_label]
   if (!is.matrix(M)) M <- matrix(M, ncol = length(col_label))
@@ -26,6 +27,7 @@ identify_motif <- function(row_label, col_label, bipartite) {
 #' @param r
 #' @param label
 #' @return motif feasibility
+#' @export
 check_motif_feasibility <- function(alpha, r, label) {
   abundance_equilibrium <- solve(alpha, -r[label])
   feasibility <- if_else(sum(abundance_equilibrium < 0) == 0, "feasible", "infeasible")
@@ -43,6 +45,7 @@ check_motif_feasibility <- function(alpha, r, label) {
 #' calculate structural stability of an interaction network
 #' @param alpha parametrized network structure
 #' @return structural stability
+#' @export
 calculate_omega <- function(alpha) {
   S <- nrow(alpha)
   Sigma <- solve(t(alpha) %*% alpha)
@@ -60,6 +63,7 @@ calculate_omega <- function(alpha) {
 #' @param r_set
 #' @param bipartite
 #' @return a tibble
+#' @export
 get_motif_gradient <- function(Inte, r_set, bipartite) {
   get_all_motifs <- function(num_row, num_col, bipartite, Inte) {
     numb <- expand.grid(
@@ -128,6 +132,7 @@ get_motif_gradient <- function(Inte, r_set, bipartite) {
     unnest(feasibility_motif)
 }
 
+#' @export
 get_subnetwork_gradient <- function(Inte, r_set, bipartite) {
   subnetwork_all <-
     r_set %>%

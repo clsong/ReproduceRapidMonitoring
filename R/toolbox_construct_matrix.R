@@ -3,6 +3,7 @@
 #' @param rho mean field interspecific competition
 #' @param delta trade-off
 #' @return stability condition
+#' @export
 calculate_gamma_hat <- function(web, rho, delta) {
   f_eig <- function(gamma_avg, web, rho, delta) {
     alpha <- construct_interaction_matrix(web, gamma_avg, rho, delta)
@@ -18,6 +19,7 @@ calculate_gamma_hat <- function(web, rho, delta) {
 #' @param rho mean-field strength
 #' @param delta trade-off
 #' @return paramatrized interaction matrix
+#' @export
 construct_interaction_matrix <- function(web, gamma_avg, rho, delta) {
   SA <- nrow(web)
   SP <- ncol(web)
@@ -39,6 +41,7 @@ construct_interaction_matrix <- function(web, gamma_avg, rho, delta) {
 #' @param strength average interaction strength
 #' @param interaction_type mutualistic or antagonistic
 #' @return paramatrized interaction matrix
+#' @export
 construct_random_interaction_component <- function(web, strength = 1, interaction_type) {
   SA <- nrow(web)
   SP <- ncol(web)

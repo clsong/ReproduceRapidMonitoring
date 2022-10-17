@@ -65,7 +65,7 @@ generate_figure3B_data <- function() {
       .progress = T
     ))
 
-  df_summarized <-
+  fig3B_df_summarized <-
     df_interaction_matrix %>%
     mutate(motif_information = map(motif_information, function(motif_information) {
       motif_information %>%
@@ -85,7 +85,7 @@ generate_figure3B_data <- function() {
 #'
 #' @export
 generate_figure3B_plot <- function(){
-  df_plot <- df_summarized %>%
+  df_plot <- fig3B_df_summarized %>%
     unnest(motif_information) %>%
     group_by(nrow, ncol, n_rep_network, lambda, interaction_type) %>%
     mutate(prop = n / sum(n)) %>%
