@@ -20,5 +20,6 @@ Imports:
     jtools,
     magrittr (>= 2.0.3),
     mvtnorm,
+    purrr,
     tidyr,
     utils

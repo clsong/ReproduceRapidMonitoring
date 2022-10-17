@@ -1,14 +1,3 @@
-# library(deSolve)
-# library(corrplot)
-# library(here)
-# library(combinat)
-# library(bmotif)
-# library(patchwork)
-# library(tidyverse)
-# library(tidygraph)
-# library(ggraph)
-# library(furrr)
-
 #' identify the type of a motif
 #' @param row_label
 #' @param col_label
