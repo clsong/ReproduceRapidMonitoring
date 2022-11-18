@@ -33,6 +33,6 @@ devtools::install_github("clsong/ReproduceRapidMonitoring")
 ## Reproduce
 The main figures can be reproduced simply by running *plot_figure_Number*. For example, figure 3 can be reproduced as
 ```{r dpi=300, warning=F, message=F}
-library(ReproduceMetaCap)
+library(ReproduceRapidMonitoring)
 plot_figure_3B()
 ```
