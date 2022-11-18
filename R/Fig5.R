@@ -1,13 +1,3 @@
-library(tidyverse)
-library(broom)
-library(bmotif)
-library(furrr)
-library(here)
-library(igraph)
-library(patchwork)
-library(tidymodels)
-library(purrrgress)
-
 #' Reproduce the data used in Figure 5 in the main text
 #'
 #' @export
