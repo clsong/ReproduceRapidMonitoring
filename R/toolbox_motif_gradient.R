@@ -132,6 +132,13 @@ get_motif_gradient <- function(Inte, r_set, bipartite) {
     unnest(feasibility_motif)
 }
 
+
+#' calculate motif profiles with a list of intrinic
+#' growth rates for subnetworks
+#' @param Inte parametrized network structure
+#' @param r_set intrinsic growth rates
+#' @param bipartite bipartite network structure
+#' @return a tibble
 #' @export
 get_subnetwork_gradient <- function(Inte, r_set, bipartite) {
   subnetwork_all <-

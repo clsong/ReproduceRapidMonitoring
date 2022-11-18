@@ -1,7 +1,7 @@
 #' Reproduce the data used in Figure 3B in the main text
 #'
 #' @export
-generate_figure3B_data <- function() {
+generate_figure_3B_data <- function() {
   plan(multisession, workers = 8)
 
   set.seed(1010)
@@ -84,7 +84,7 @@ generate_figure3B_data <- function() {
 #' Reproduce Figure 3B in the main text
 #'
 #' @export
-generate_figure3B_plot <- function() {
+plot_figure_3B <- function() {
   df_plot <- fig3B_df_summarized %>%
     unnest(motif_information) %>%
     group_by(nrow, ncol, n_rep_network, lambda, interaction_type) %>%

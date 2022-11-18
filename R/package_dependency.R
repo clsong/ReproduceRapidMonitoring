@@ -8,5 +8,8 @@
 #' @import utils
 #' @import ggdist
 #' @import tibble
+#' @import future
+#' @import ggthemr
+#' @import patchwork
 #' @importFrom jtools theme_nice
 NULL
